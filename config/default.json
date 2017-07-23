@@ -1,0 +1,8 @@
+{
+	"dbConfig":{
+		"host":"localhost",
+		"user":"NODEUSER",
+		"password":"somepass",
+		"dbName":"test"
+	}
+}

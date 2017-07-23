@@ -1,0 +1,34 @@
+{
+  "name": "jenkins-integration",
+  "version": "1.0.0",
+  "description": "an integrations with jenkins",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kinichahau87/JenkinsIntegration.git"
+  },
+  "keywords": [
+    "jenkins"
+  ],
+  "author": "kevin morfin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kinichahau87/JenkinsIntegration/issues"
+  },
+  "homepage": "https://github.com/kinichahau87/JenkinsIntegration#readme",
+  "dependencies": {
+    "config": "^1.26.1",
+    "express": "^4.15.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.3.0",
+    "gulp": "^3.9.1",
+    "gulp-beautify": "^2.0.1",
+    "gulp-eslint": "^4.0.0",
+    "gulp-watch": "^4.3.11"
+  }
+}
