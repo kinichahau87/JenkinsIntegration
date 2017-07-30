@@ -4,5 +4,11 @@
 		"user":"NODEUSER",
 		"password":"somepass",
 		"dbName":"test"
+	},
+	"jenkins":{
+		"protocol":"http",
+		"host":"c2winrepo01.veritracks.com:8080/jenkins",
+		"user":"admin",
+		"secret":"stopllc"
 	}
 }

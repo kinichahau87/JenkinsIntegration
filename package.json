@@ -4,7 +4,7 @@
   "description": "an integrations with jenkins",
   "main": "index.js",
   "scripts": {
-    "dev": "node server/index.js",
+    "dev": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,14 +21,20 @@
   },
   "homepage": "https://github.com/kinichahau87/JenkinsIntegration#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "config": "^1.26.1",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "jenkins-api": "^0.2.8",
+    "promise": "^8.0.1",
+    "pug": "^2.0.0-rc.2",
+    "uglify-js": "^3.0.26"
   },
   "devDependencies": {
     "eslint": "^4.3.0",
     "gulp": "^3.9.1",
     "gulp-beautify": "^2.0.1",
     "gulp-eslint": "^4.0.0",
-    "gulp-watch": "^4.3.11"
+    "gulp-watch": "^4.3.11",
+    "nodemon": "^1.11.0"
   }
 }

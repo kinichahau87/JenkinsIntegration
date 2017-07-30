@@ -1,0 +1,64 @@
+doctype html
+html
+	head
+		title Jenkins Integration
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+		link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css")
+		link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css")
+		link(rel="stylesheet", href="/static/css/styles.css")
+		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js")
+		script(src="/static/js/main.js")
+
+	body
+		div.main-container-index
+			div.navbar.navbar-inverse.navbar-static-top
+				div
+					div.navbar-brand Jenkins
+				ul.nav.navbar-nav
+					li.active
+						a(href="/") Jobs
+					li
+						a(href="/build-results") Build Results
+					li
+						a(href="/test-results") Test Results
+			div.job-list-container
+				if jobs != null
+					ul.nav
+						for job in jobs
+							li
+								div.form-group
+									div.input-group.btn
+										div.input-group-addon.btn-primary.primary#job-index #{job.index}
+										div.form-control#job-name #{job.name}
+										
+				else
+					p #{jobs}
+			div.job-detail-container.not-visible#detail-container-main
+				div.detail-header#details-header Job Details
+				div.section-group
+					div.detail-section
+						label(for="detail-job-name" class="detail-item") Job Name:
+						div.detail-item#detail-job-name
+						label(for="detail-last-build" class="detail-item") Last Build:
+						div.detail-item#detail-last-build-date
+						label(for="detail-last-build-failed" class="detail-item") Last Build Failed:
+						div.detail-item#detail-last-build-failed
+						label(for="detail-last-build-completed" class="detail-item") Last Build Completed:
+						div.detail-item#detail-last-build-completed
+				div.section-group
+					div.detail-section
+						label(for="detail-next-build" class="detail-item") Next Build:
+						div.detail-item#detail-next-build
+						label(for="detail-is-buildable" class="detail-item") Buildable:
+						div.detail-item#detail-is-buildable
+						label(for="detail-is-inQueue" class="detail-item") In Queue:
+						div.detail-item#detail-is-inQueue
+						label(for="detail-upstream-projects" class="detail-item") Upstream Projects:
+						div.detail-item#detail-upstream-projects
+				div.section-group
+					div.detail-section
+						div.btn.btn-primary.not-visible#start-job-btn Start Job
+					
+				
+			
+		

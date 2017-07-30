@@ -1,0 +1,40 @@
+.main-container-index {
+	margin:10px;
+}
+
+.job-list-container {
+	width:50%;
+}
+
+.job.detail.container {
+	margin:30px 10px 10px 10px;
+	display:block;
+}
+
+.not-visible {
+	display:none;
+}
+
+.primary {
+	color: #fff !important;
+}
+
+.detail-header {
+	font-size:16px;
+	color: #ddd;
+	margin:5px;
+}
+
+.detail-section {
+	margin:5px;
+	display:inline;
+	display:-moz-box;
+}
+
+.section-group {
+	display:block;
+}
+
+.detail-item {
+	margin:5px;
+}
