@@ -3,6 +3,8 @@ var router = express.Router();
 var __promise = require("promise");
 var config = require("config");
 var jenkinsapi = require("jenkins-api");
+var http = require("http");
+var urlencode = require("urlencode");
 var jenkins = null;
 
 var initString = [];
@@ -29,12 +31,9 @@ router.get("/", function(req, res) {
 
 	aPromise.then((results) => {
 		var jobs = [];
-		for (var i = 0; i < results.length; i++) {
-			if (results[i].hasOwnProperty("name")) {
-				jobs.push({
-					"name": results[i].name.toUpperCase(),
-					"index": (i + 1)
-				});
+		for (var i = 0; i < results.length; i++){
+			if (results[i].hasOwnProperty("name")){
+				jobs.push({"name":results[i].name.toUpperCase(), "index": (i + 1)});
 			}
 		}
 		res.render("index", {
@@ -47,12 +46,12 @@ router.get("/", function(req, res) {
 		});
 
 	});
-}); //end of get
+});//end of get
 
-router.get("/job-detail", function(req, res) {
-	var aPromise = new __promise(function(resolve, reject) {
-		jenkins.job_info(req.query.name, function(err, data) {
-			if (err) {
+router.get("/job-detail",function(req, res){
+	var aPromise = new __promise(function(resolve, reject){
+		jenkins.job_info(req.query.name, function(err, data){
+			if (err){
 				reject(err);
 			}
 			resolve(data);
@@ -66,17 +65,39 @@ router.get("/job-detail", function(req, res) {
 	});
 });
 
-router.post("/job-start", function(req, res) {
-	var aPromise = new __promise(function(resolve, reject) {
-		console.log(req.body);
-		jenkins.build(req.body.name, {
-			token: ""
-		}, function(err, data) {
-			if (err) {
-				reject(err);
-			}
-			resolve(data);
+router.post("/job-start", function(req, res){
+	var aPromise = new __promise(function(resolve, reject){
+		var postData = JSON.stringify({"token": config.get("jenkins.jobToken")});
+		var __bpath = "/jenkins/job/" + urlencode(req.body.name) + "/build?token=" + config.get("jenkins.jobToken");
+		var raHost = config.get("jenkins.rawHost");
+		var lHeaders = {"Content-Type": "application/json", "Content-Length": Buffer.byteLength(postData), "Jenkins-Crumb": process.env.jenkinsCrumb, "Authorization": "Basic " + Buffer(config.get("jenkins.user") + ":" + config.get("jenkins.secret")).toString("base64")};
+		const __options = {
+			"hostname": raHost,
+			"path": __bpath,
+			"method": "POST",
+			"port": "8080",
+			"headers": lHeaders
+		};
+		console.log(__options);
+		var hpReq = http.request(__options, (response) => {
+			let str = "";
+			response.on("data", function(chunk){
+				console.log(chunk);
+				str += chunk;
+			});
+
+			response.on("end", function(){
+				console.log(str);
+				resolve(str);
+			});
+
+			response.on("error", function(e){
+				console.log(e);
+				reject(e);
+			});
 		});
+		hpReq.write(postData);
+		hpReq.end();
 	});
 
 	aPromise.then((results) => {

@@ -7,8 +7,10 @@
 	},
 	"jenkins":{
 		"protocol":"http",
-		"host":"localhost:8080/jenkins",
+		"host":"c2winrepo01.veritracks.com:8080/jenkins",
+		"rawHost": "c2winrepo01.veritracks.com",
 		"user":"admin",
-		"secret":"stopllc"
+		"secret":"stopllc",
+		"jobToken": "build_token_secret"
 	}
 }

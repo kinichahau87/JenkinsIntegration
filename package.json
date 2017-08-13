@@ -24,10 +24,13 @@
     "body-parser": "^1.17.2",
     "config": "^1.26.1",
     "express": "^4.15.3",
+    "http": "0.0.0",
     "jenkins-api": "^0.2.8",
+    "node-env-file": "^0.1.8",
     "promise": "^8.0.1",
     "pug": "^2.0.0-rc.2",
-    "uglify-js": "^3.0.26"
+    "uglify-js": "^3.0.26",
+    "urlencode": "^1.1.0"
   },
   "devDependencies": {
     "eslint": "^4.3.0",

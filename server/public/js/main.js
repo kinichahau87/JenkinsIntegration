@@ -1,42 +1,39 @@
-$(function() {
-	$("#job-name").click(function() {
+$(function(){
+	$("#job-name").click(function(){
 		getJobDetails($(this).html());
 	});
 });
 
-function getJobDetails(jobName) {
+function getJobDetails(jobName){
 	$.ajax({
 		url: "/job-detail",
 		method: "GET",
-		data: {
-			"name": jobName
-		}
-	}).success(function(data) {
+		data: {"name" : jobName}
+	}).success(function(data){
+		console.log(data);
 		$("#detail-job-name").html(data.name.toUpperCase());
-		$("#detail-last-build-date").html(data.lastBuild == null ? "NEVER" : data.lastBuild);
-		$("#detail-last-build-failed").html(data.lastFailedBuild == null ? "NEVER" : data.lastFailedBuild);
-		$("#detail-last-build-completed").html(data.lastCompletedBuild == null ? "NEVER" : data.lastCompletedBuild);
-		$("#detail-next-build").html(data.nextBuildNumber == null ? "UNKNOWN" : data.nextBuildNumber);
-		$("#detail-is-buildable").html(data.buildable ? "TRUE" : "FALSE");
-		$("#detail-is-inQueue").html(data.inQueue ? "TRUE" : "FALSE");
+		$("#detail-last-build-date").html(data.lastBuild == null?"NEVER":data.lastBuild.number);
+		$("#detail-last-build-failed").html(data.lastFailedBuild == null?"NEVER":data.lastFailedBuild.number);
+		$("#detail-last-build-completed").html(data.lastCompletedBuild == null?"NEVER":data.lastCompletedBuild.number);
+		$("#detail-next-build").html(data.nextBuildNumber == null?"UNKNOWN":data.nextBuildNumber);
+		$("#detail-is-buildable").html(data.buildable?"TRUE":"FALSE");
+		$("#detail-is-inQueue").html(data.inQueue?"TRUE":"FALSE");
 		$("#detail-upstream-projects").html(data.upstreamProjects.length);
 		$("#detail-container-main").removeClass("not-visible");
 
-		if (data.buildable) {
+		if (data.buildable){
 			$("#start-job-btn").removeClass("not-visible");
-			$("#start-job-btn").click(function() {
+			$("#start-job-btn").click(function(){
 				startJob(data.name);
 			});
 		}
 	});
 }
 
-function startJob(jobName) {
+function startJob(jobName){
 	console.log(jobName);
-	$.post("/job-start", {
-		"name": jobName
-	}, function(data) {
-		console.log(data);
+	$.post( "/job-start", {"name": jobName},function(data){
+		getJobDetails(jobName);
 	});
 
 }
