@@ -8,7 +8,7 @@
 	"jenkins":{
 		"protocol":"http",
 		"host":"example.com:8080/jenkins",
-		"rawHost": "c2winrepo01.veritracks.com",
+		"rawHost": "example.com",
 		"user":"admin",
 		"secret":"stopllc",
 		"jobToken": "build_token_secret"
